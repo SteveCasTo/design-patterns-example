@@ -73,4 +73,14 @@ class HealthCheckAction implements DeployAction {
   describe(): string { return "HealthCheckAction"; }
 }
 
-export { BuildAction, MigrateAction, PublishAction, HealthCheckAction };
+class FailingAction implements DeployAction {
+  execute(): void {
+    throw new Error("Fallo simulado para demostrar rollback");
+  }
+  undo(): void {
+    console.log("[ROLLBACK] FailingAction: limpiando estado corrupto...");
+  }
+  describe(): string { return "FailingAction"; }
+}
+
+export { BuildAction, MigrateAction, PublishAction, HealthCheckAction, FailingAction };

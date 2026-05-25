@@ -1,5 +1,5 @@
 import { resolveFactory } from "./environment/environment.factory.ts";
-import { BuildAction, MigrateAction, PublishAction, HealthCheckAction } from "./deployment/deployment.actions.ts";
+import { BuildAction, MigrateAction, PublishAction, HealthCheckAction, FailingAction } from "./deployment/deployment.actions.ts";
 import { DeploymentEventNotifier, ConsoleListener, AuditListener } from "./deployment/deployment.notifier.ts";
 import { resolveStrategy } from "./deployment/deployment.executor.ts";
 import { StandardDeployment, HotfixDeployment } from "./deployment/deployment.pipeline.ts";
@@ -35,7 +35,7 @@ notifier.subscribe(audit);
 const rawActions = [
   new BuildAction(runner, logger),
   new MigrateAction(runner, logger),
-  new PublishAction(runner, logger),
+  modeArg === "fail" ? new FailingAction() : new PublishAction(runner, logger),
   new HealthCheckAction(runner, logger),
 ];
 
