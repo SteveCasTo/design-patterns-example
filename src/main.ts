@@ -10,7 +10,7 @@ import type { Environment, DeployStrategy } from "./types.ts";
 // Uso: bun run src/main.ts <entorno> <estrategia> [hotfix]
 // Ejemplo: bun run src/main.ts prod blue-green
 //          bun run src/main.ts dev direct hotfix
-
+// @ts-ignore
 const [,, envArg = "dev", strategyArg = "direct", modeArg] = process.argv;
 
 const env = envArg as Environment;
