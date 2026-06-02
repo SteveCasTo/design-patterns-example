@@ -1,0 +1,13 @@
+bun src/main.ts dev direct
+
+
+bun src/main.ts prod direct
+
+
+bun src/main.ts staging rolling
+
+
+bun src/main.ts dev direct fail
+
+
+bun src/main.ts prod blue-green hotfix
